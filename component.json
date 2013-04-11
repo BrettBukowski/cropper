@@ -1,0 +1,26 @@
+{
+  "name": "cropper",
+  "repo": "BrettBukowski/cropper",
+  "description": "Crop pictures in your browser",
+  "version": "0.0.1",
+  "keywords": [
+    "pictures",
+    "crop",
+    "images"
+  ],
+  "development": {},
+  "license": "MIT",
+  "scripts": [
+    "index.js",
+    "lib/Cropper.js",
+    "lib/CropPane.js",
+    "lib/ImageCanvas.js"
+  ],
+  "styles": [
+    "styles/Cropper.css"
+  ],
+  "dependencies": {
+    "component/emitter": "*",
+    "component/bind": "*"
+  }
+}
