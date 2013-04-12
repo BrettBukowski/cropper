@@ -14,6 +14,8 @@
     "index.js",
     "lib/Cropper.js",
     "lib/CropPane.js",
+    "lib/Overlay.js",
+    "lib/Resizer.js",
     "lib/ImageCanvas.js"
   ],
   "styles": [

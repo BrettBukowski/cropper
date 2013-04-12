@@ -1,3 +1,39 @@
-canvas {
+.cropper-canvas {
   box-shadow: 0 0 3px rgba(0, 0, 0, .5);
+}
+.cropper-crop-pane {
+  cursor: all-scroll;
+}
+
+.cropper-sizer {
+  background: #EFEFEF;
+  border-radius: 50%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+  height: 10px;
+  position: absolute;
+  width: 10px;
+}
+.cropper-sizer-ne,
+.cropper-sizer-nw {
+  top: 0;
+}
+.cropper-sizer-ne,
+.cropper-sizer-se {
+  right: 0;
+}
+.cropper-sizer-nw,
+.cropper-sizer-sw {
+  left: 0;
+}
+.cropper-sizer-se,
+.cropper-sizer-sw {
+  bottom: 0;
+}
+.cropper-sizer-ne,
+.cropper-sizer-sw {
+  cursor: nesw-resize;
+}
+.cropper-sizer-nw,
+.cropper-sizer-se {
+  cursor: nwse-resize;
 }
