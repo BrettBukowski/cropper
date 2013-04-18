@@ -14,24 +14,41 @@
   .cropped {
     box-shadow: 0 0 3px rgba(0, 0, 0, .5);
   }
+  .controls {
+    text-align: center;
+  }
   </style>
 </head>
 <body>
+
+  <div class="controls">
+    <button id="crop">Crop!</button>
+  </div>
+
   <img src="grumpy-cat-example.jpg" alt="grumpy"/>
-  <button>Crop</button>
+
   <script src="build/cropper.js"></script>
+
   <script>
   window.onload = function () {
     var Cropper = require('cropper'),
         crop = new Cropper(document.querySelector('img'), {});
 
-    document.querySelector('button').addEventListener('click', function () {
-      var img = document.createElement('img');
+    document.getElementById('crop').addEventListener('click', function () {
+      var img = document.querySelector('img');
+      img.parentNode.removeChild(img);
+
+      img = document.createElement('img');
       img.src = crop.get();
       img.className = 'cropped';
       document.body.appendChild(img);
+
+      crop.destroy();
+      var controls = document.querySelector('.controls');
+      controls.parentNode.removeChild(controls);
     });
   };
   </script>
+
 </body>
 </html>
