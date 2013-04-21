@@ -17,7 +17,8 @@
     "lib/Overlay.js",
     "lib/Resizer.js",
     "lib/DOMTools.js",
-    "lib/ImageCanvas.js"
+    "lib/ImageCanvas.js",
+    "lib/Draggable.js"
   ],
   "styles": [
     "styles/Cropper.css"

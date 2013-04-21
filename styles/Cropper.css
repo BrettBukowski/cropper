@@ -3,31 +3,35 @@
 }
 .cropper-crop-pane {
   cursor: all-scroll;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .cropper-sizer {
   background: #EFEFEF;
   border-radius: 50%;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .3);
-  height: 10px;
+  height: 12px;
   position: absolute;
-  width: 10px;
+  width: 12px;
 }
 .cropper-sizer-ne,
 .cropper-sizer-nw {
-  top: 0;
+  top: -4px;
 }
 .cropper-sizer-ne,
 .cropper-sizer-se {
-  right: 0;
+  right: -4px;
 }
 .cropper-sizer-nw,
 .cropper-sizer-sw {
-  left: 0;
+  left: -4px;
 }
 .cropper-sizer-se,
 .cropper-sizer-sw {
-  bottom: 0;
+  bottom: -4px;
 }
 .cropper-sizer-ne,
 .cropper-sizer-sw {
