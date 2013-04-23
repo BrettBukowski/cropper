@@ -17,11 +17,28 @@
   .controls {
     text-align: center;
   }
+  #crop { display: block; margin: 12px auto; }
   </style>
 </head>
 <body>
 
   <div class="controls">
+    <label>
+      Ratio
+      <select>
+        <option>None</option>
+        <option value="square">Square</option>
+        <option value="3:2">3:2</option>
+        <option value="4:3">4:3</option>
+        <option value="5:2">5:2</option>
+        <option value="5:4">5:4</option>
+        <option value="6:4">6:4</option>
+        <option value="7:5">7:5</option>
+        <option value="10:8">10:8</option>
+        <option value="16:9">16:9</option>
+      </select>
+      <button id="ratio">Apply</button>
+    </label>
     <button id="crop">Crop!</button>
   </div>
 
@@ -46,6 +63,11 @@
       crop.destroy();
       var controls = document.querySelector('.controls');
       controls.parentNode.removeChild(controls);
+    });
+
+    document.getElementById('ratio').addEventListener('click', function () {
+      var select = document.querySelector('select');
+      crop.setRatio(select.options[select.selectedIndex].value);
     });
   };
   </script>
