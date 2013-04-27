@@ -14,7 +14,7 @@
     "index.js",
     "lib/Cropper.js",
     "lib/CropPane.js",
-    "lib/Overlay.js",
+    "lib/Position.js",
     "lib/Resizer.js",
     "lib/DOMTools.js",
     "lib/ImageCanvas.js",

@@ -49,7 +49,7 @@
   <script>
   window.onload = function () {
     var Cropper = require('cropper'),
-        crop = new Cropper(document.querySelector('img'), {});
+        crop = new Cropper(document.querySelector('img'));
 
     document.getElementById('crop').addEventListener('click', function () {
       var img = document.querySelector('img');
