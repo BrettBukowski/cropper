@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/fontawesome.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="build/cropper.css">
+  <!--[if lt IE 9]>
+  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <title>Cropper by BrettBukowski</title>
+</head>
+<body>
+  <div id="main">
+    <header>
+      <h1>Cropper</h1>
+      <aside>Crop images in your browser</aside>
+      <nav>
+        <ul>
+          <li><a href="https://github.com/BrettBukowski/cropper/zipball/master"><i class="icon-download-alt"></i> Download .zip</a></li>
+          <li><a href="docs/lib/Cropper.js.html"><i class="icon-book"></i> View the Annotated Source</a></li>
+          <li><a href="https://github.com/BrettBukowski/cropper/"><i class="icon-github"></i> View on GitHub</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section>
+      <p><strong>Try it</strong></p>
+
+      <div id="controls">
+        <label>
+          Ratio
+          <select>
+            <option>None</option>
+            <option value="square">Square</option>
+            <option value="3:2">3:2</option>
+            <option value="4:3">4:3</option>
+            <option value="5:2">5:2</option>
+            <option value="5:4">5:4</option>
+            <option value="6:4">6:4</option>
+            <option value="7:5">7:5</option>
+            <option value="10:8">10:8</option>
+            <option value="16:9">16:9</option>
+          </select>
+          <button id="ratio">Apply</button>
+        </label>
+        <button id="crop"><i class="icon-bolt"></i> Crop!</button>
+      </div>
+
+      <div id="example">
+        <img id="grump" src="grumpy-cat-example.jpg" alt="example image">
+      </div>
+
+    </section>
+  </div>
+
+  <footer>
+  Project maintained by <a href="https://github.com/BrettBukowski">BrettBukowski</a>
+  </footer>
+  <script src="build/cropper.min.js"></script>
+  <script>
+  window.onload = function () {
+    var Cropper = require('cropper'),
+        crop = new Cropper(document.querySelector('#grump'));
+
+    document.getElementById('crop').addEventListener('click', function () {
+      var img = document.querySelector('img');
+      img.parentNode.removeChild(img);
+
+      img = document.createElement('img');
+      img.src = crop.get();
+      img.className = 'cropped';
+      document.getElementById('example').appendChild(img);
+
+      crop.destroy();
+      var controls = document.getElementById('controls');
+      controls.parentNode.removeChild(controls);
+    });
+
+    document.getElementById('ratio').addEventListener('click', function () {
+      var select = document.querySelector('select');
+      crop.setRatio(select.options[select.selectedIndex].value);
+    });
+  };
+  </script>
+</body>
+</html>

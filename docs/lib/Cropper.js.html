@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cropper.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "lib/Cropper.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#cropper">Cropper</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>Cropper.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">CropPane</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./CropPane.js&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">ImageCanvas</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./ImageCanvas.js&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">emitter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;emitter&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">bind</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;bind&#39;</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">Cropper</span><span class="p">;</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="cropper">
+  <h1>
+    <a href="#cropper" class="pilcrow">&#182;</a>
+    Cropper
+  </h1>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">img</span>
+      <span class="dox_type">Object</span>
+      <span>Image element to crop</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">{Object=}
+
+-</span>
+      <span class="dox_type">Object=
+
+-</span>
+      <span>options:
+
+<ul>
+<li>ratio: {String} none, square, 4:3, 5:2, 5:4, 3:2, 6:4, 7:5, 10:8, 16:9 (defaults to none)</li>
+<li>minWidth: {Number} Minimum width (px) of the cropped area (defaults to 20)</li>
+<li>minHeight: {Number} Minimum height (px) of the cropped area (defaults to 20)</li>
+<li>maxWidth: {Number} Maximum width (px) of the cropped area</li>
+<li>minHeight: {Number} Maximum height (px) of the cropped area</li>
+<li>defaultHeight: {Number} Default crop area height (px) (defaults to 100)</li>
+<li>defaultWidth: {Number} Default crop area width (px) (defaults to 100)</li>
+</ul></span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="kd">function</span> <span class="nx">Cropper</span> <span class="p">(</span><span class="nx">img</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">(</span><span class="nx">options</span> <span class="o">||</span> <span class="p">{});</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">img</span> <span class="o">=</span> <span class="nx">img</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">cropPane</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CropPane</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ImageCanvas</span><span class="p">(</span><span class="nx">img</span><span class="p">);</span>
+
+  <span class="nx">emitter</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">_init</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nx">Cropper</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">_defaultOptions</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">supplied</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">ratio</span><span class="o">:</span>          <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+      <span class="nx">minWidth</span><span class="o">:</span>       <span class="mi">20</span><span class="p">,</span>
+      <span class="nx">minHeight</span><span class="o">:</span>      <span class="mi">20</span><span class="p">,</span>
+      <span class="nx">defaultWidth</span><span class="o">:</span>   <span class="mi">100</span><span class="p">,</span>
+      <span class="nx">defaultHeight</span><span class="o">:</span>  <span class="mi">100</span>
+    <span class="p">},</span>
+    <span class="nx">options</span> <span class="o">=</span> <span class="nx">supplied</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">defaults</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="nx">i</span> <span class="k">in</span> <span class="nx">options</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">options</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">defaults</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
+  <span class="p">},</span>
+
+  <span class="nx">_init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">cropPane</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_cropChange</span><span class="p">));</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">cropPane</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">img</span><span class="p">);</span>
+  <span class="p">},</span>
+
+  <span class="nx">_cropChange</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">position</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_croppedPosition</span> <span class="o">=</span> <span class="nx">position</span><span class="p">;</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p><strong>Change Event</strong></p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">this</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="nx">position</span><span class="p">);</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">drawMask</span><span class="p">(</span><span class="nx">position</span><span class="p">);</span>
+  <span class="p">},</span>
+
+  <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">imageType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">toDataUrl</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_croppedPosition</span><span class="p">,</span> <span class="nx">imageType</span><span class="p">);</span>
+  <span class="p">},</span>
+
+  <span class="nx">setRatio</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ratio</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">cropPane</span><span class="p">.</span><span class="nx">setRatio</span><span class="p">(</span><span class="nx">ratio</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">cropPane</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
+  <span class="p">},</span>
+
+  <span class="nx">destroy</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">cropPane</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cropPane</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>Options
+- container: place inside this element instead of overlaying original image</p>
+
+<p>TK
+- Compare performance of #getBoundingClientRect and #getComputedStyle
+- Better touch support (ideally multi-touch radness)</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
