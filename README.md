@@ -80,7 +80,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 
-[pic]: https://dl.dropboxusercontent.com/u/302368/github/cropper.png
+[pic]: https://dl.dropboxusercontent.com/u/302368/github/cropper.gif
 [component]: https://github.com/component/component/
 [js]: https://github.com/BrettBukowski/cropper/blob/gh-pages/build/cropper.min.js
 [css]: https://github.com/BrettBukowski/cropper/blob/gh-pages/build/cropper.css
