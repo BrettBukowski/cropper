@@ -19,11 +19,11 @@ Then,
 
 Check the example.html file for a demo.
 
-If you don't want to use component, include the .min.js file on the page:
+If you don't want to use component, include the [.min.js file][js] on the page:
 
     <script src="build/cropper.min.js"></script>
 
-And the CSS:
+And the [CSS][css]:
 
     <link rel="stylesheet" type="text/css" href="build/cropper.css">
 
@@ -82,3 +82,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 [pic]: https://dl.dropboxusercontent.com/u/302368/github/cropper.png
 [component]: https://github.com/component/component/
+[js]: https://github.com/BrettBukowski/cropper/blob/gh-pages/build/cropper.min.js
+[css]: https://github.com/BrettBukowski/cropper/blob/gh-pages/build/cropper.css
