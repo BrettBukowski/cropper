@@ -36,7 +36,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['index.js', 'lib/**/*.js', 'test/**/*.js', 'component.json'],
-        tasks: ['jshint', 'component', 'mocha_phantomjs']
+        tasks: ['jshint', 'component', 'mocha']
       }
     },
 
@@ -48,8 +48,11 @@ module.exports = function(grunt) {
       }
     },
 
-    mocha_phantomjs: {
-      all: ['test/**/*.html']
+    mocha: {
+      all: ['test/**/*.html'],
+      options: {
+        reporter: 'Spec'
+      }
     }
 
   });
@@ -59,8 +62,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-mocha-phantomjs');
+  grunt.loadNpmTasks('grunt-mocha');
 
-  grunt.registerTask('build', ['jshint', 'mocha_phantomjs', 'component', 'uglify', 'docker']);
-  grunt.registerTask('test', ['jshint', 'component', 'mocha_phantomjs']);
+  grunt.registerTask('build', ['jshint', 'mocha', 'component', 'uglify', 'docker']);
+  grunt.registerTask('test', ['jshint', 'component', 'mocha']);
 };
