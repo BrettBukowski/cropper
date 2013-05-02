@@ -51,20 +51,9 @@ module.exports = function(grunt) {
     },
 
     mocha: {
-      test: {
-        options: {
-          reporter: 'Spec',
-          urls: ['http://localhost:' + port + '/test/runner.html']
-        }
-      }
-    },
-
-    connect: {
-      server: {
-        options: {
-          port: port,
-          base: '.'
-        }
+      all: ['test/**/*.html'],
+      options: {
+        reporter: 'Spec'
       }
     }
 
@@ -76,8 +65,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-mocha');
-  grunt.loadNpmTasks('grunt-contrib-connect');
 
   grunt.registerTask('build', ['jshint', 'mocha', 'component', 'uglify', 'docker']);
-  grunt.registerTask('test', ['jshint', 'component', 'connect', 'mocha']);
+  grunt.registerTask('test', ['jshint', 'component', 'mocha']);
 };

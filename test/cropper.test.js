@@ -7,6 +7,10 @@ describe('Cropper', function () {
     return document.querySelector('.cropper-crop-pane').getBoundingClientRect();
   }
 
+  function cropPaneOffset (position) {
+    return document.querySelector('.cropper-crop-pane')['offset' + position];
+  }
+
   afterEach(function () {
     if (this.crop) {
       this.crop.destroy();
@@ -84,6 +88,13 @@ describe('Cropper', function () {
       var expected = 100 / (16 / 9);
       expect(size.width).to.equal(100);
       expect(size.height).to.be.within(Math.floor(expected), Math.ceil(expected));
+    });
+
+    it('Places pane in the center of the image', function () {
+      this.crop = new Cropper(img);
+      var position = cropPaneSize();
+      var imgSize = img.getBoundingClientRect();
+      expect(cropPaneOffset('Top')).to.equal((imgSize.height / 2) - (position.height / 2));
     });
   });
 
