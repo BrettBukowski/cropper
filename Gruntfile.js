@@ -53,7 +53,8 @@ module.exports = function(grunt) {
     mocha: {
       all: ['test/**/*.html'],
       options: {
-        reporter: 'Spec'
+        reporter: 'Spec',
+        run: true
       }
     }
 

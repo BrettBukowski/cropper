@@ -24,6 +24,6 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "scripts": {
-    "test": "grunt test --verbose"
+    "test": "grunt test"
   }
 }
