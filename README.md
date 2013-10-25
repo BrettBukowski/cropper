@@ -1,7 +1,7 @@
 cropper
 =======
 
-[![Build Status](https://travis-ci.org/BrettBukowski/cropper.png?branch=master)](https://travis-ci.org/BrettBukowski/cropper)
+[![Build Status](https://travis-ci.org/BrettBukowski/cropper.png?branch=master)](https://travis-ci.org/BrettBukowski/cropper) [![Code Climate](https://codeclimate.com/github/BrettBukowski/cropper.png)](https://codeclimate.com/github/BrettBukowski/cropper)
 
 Crop images in your browser.
 
